@@ -120,21 +120,21 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | We can serialize it by using `JSON.stringify(object)`, and then putting it in a buffer to send via JS functions for UDP.  |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | It is a package manager that will manage modules and dependencies so that node can find them.  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | That will allow the install a module, the flag allowing to save the dependency.  |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | We can use it to find modules that we are looking for. In this case : UUID  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | We need to first import the module via `npm install --save uuid`, and then in the code, as exemplained in the documentation : `const { v4: uuidv4 } = require('uuid'); uuidv4();` |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | With the function `setInterval(<functon>, <milliseconds>, <function's arguements>);`  |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | We create a socket based on upd4 thanks to the dgram library, and the use the function send() which takes the message and the protocol's address and port.  |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | Use the line `var args = process.argv.slice(2);` which will remove the trivial arguements, so that you can work with yours. |
 
 
 ## Task 3: package the "musician" app in a Docker image
@@ -142,17 +142,17 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *Enter your response here...*  |
+| | We must use a Dockerfile that will define which Docker Image to use and what to add, and then run it with `Docker build -t res/musician .` In our case, we want tcpdump as well as copying our index.js in the correct node.js folder. We also want to execute our script. |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | We can use it to execute our script thanks to `ENTRYPOINT ["node","/opt/app/index.js"]`  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | We run a container using `Docker run -d res/musician`, which will launch a countainer in the background.  |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | `docker ps` |
 |Question | How do we **stop/kill** one running container?  |
-| | *Enter your response here...*  |
+| | `docker kill <name>`  |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *Enter your response here...*  |
+| | We can either just launch the container not in the background and see the logs, use `docker logs` or even connecting to the container and using `tcpdump` |
 
 
 ## Task 4: implement an "auditor" Node.js application
