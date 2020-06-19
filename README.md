@@ -162,13 +162,13 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
 | | We create a socket thanks do dgram, then `bind` the socket to the protocol's address and port.  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | We can use the musician's UUID as the map's key to update its status everytime we recieve a new one, with the command `Map.set()`. It's very useful as this command will create/update the status according to the key. |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | This library can not only format our date as we want (`moment()` will create a new date at the current time, format ISO), but we can also compare dates easily with the functions it provides. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | We can create a function that will get called every second, checking if a musician has been inactive for 5 seconds or more. In this case, we will use `Map.delete(key)` and remove the musician from the map.|
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | Using the built-in library `Net`, we can create a server. Using the commands `Net.server, Net.listen and Net.on`, we can listen to a port and do an action everytime we recieve a request. I this case, we will generate a JSON file containing all the current musicians in the map. |
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -176,7 +176,7 @@ When you connect to the TCP interface of the **Auditor**, you should receive an 
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
+| | We can create containers, multiple for musicians, and one auditor. Then, we can connect to docker via TCP connection, port 2205, to recieve current musicians. We can then kill some containers and see if the auditor updates corretly. We can also use `validate.sh` which will check all of that for us! |
 
 
 ## Constraints
