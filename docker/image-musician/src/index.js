@@ -1,5 +1,6 @@
 var args = process.argv.slice(2);
 var musician = new Object();
+var moment = require('moment');
 
 //depedencies
 const { v4: uuidv4 } = require('uuid');
@@ -18,9 +19,9 @@ const protocol = {
 
 function emitUDP(protocol, socket, object){
 
-    object.timestamp = Date.now();
+    object.timestamp = moment();
     const payload = JSON.stringify(object);
-    message = new Buffer(payload);
+    message = Buffer.from(payload);
 
     socket.send(message, 0, message.length, protocol.multicast_port, protocol.multicast_address,
         function(err, bytes) {
@@ -33,6 +34,7 @@ function emitUDP(protocol, socket, object){
 if(args.length > 1 || args.length < 1){
     
     console.log("Must provide 1 argument");
+    return;
 
 } else {
 
@@ -50,7 +52,7 @@ if(args.length > 1 || args.length < 1){
         default:
             console.log("Invalid instrument choice"); return;   
     }
-    console.log(musician.sound);
+
 }
 
 setInterval(emitUDP, 1000, protocol, socket, musician);
